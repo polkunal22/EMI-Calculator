@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <meta name="description" content="Plan your next move with a clear, easy-to-use EMI and loan repayment calculator.">
+  <title>EMI Planner — Loan calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header><div class="shell nav"><div class="brand"><span class="brandmark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17.5 9 12l3.5 3.5L20 7"/><path d="M15 7h5v5"/></svg></span>Clearpath<span style="font-weight:500;color:#819087">Finance</span></div><div class="nav-right"><span>Simple tools for smarter decisions</span><span class="status"><i class="dot"></i> Calculator ready</span></div></div></header>
+  <main class="shell">
+    <section class="intro"><div class="eyebrow"><span></span> Loan planning, made clear</div><h1>Know your monthly commitment.</h1><p>Adjust your loan details to see what your payments could look like.</p></section>
+    <section class="workspace" aria-label="EMI calculator">
+      <div class="card inputs"><div class="card-heading"><div><h2>Loan details</h2><div class="subhead">Set your loan amount, rate and duration</div></div><select class="currency-select" id="currency" aria-label="Currency"><option value="₹">INR · ₹</option><option value="$">USD · $</option><option value="€">EUR · €</option><option value="£">GBP · £</option></select></div>
+        <div class="field"><div class="fieldline"><label for="amount">Loan amount</label><div class="valuebox"><span class="unit currency-symbol">₹</span><input id="amount" type="number" min="10000" max="50000000" step="10000" value="2500000" inputmode="numeric" aria-label="Loan amount"></div></div><input id="amountRange" type="range" min="10000" max="50000000" step="10000" value="2500000" aria-label="Adjust loan amount"><div class="bounds"><span class="money-min">₹10,000</span><span class="money-max">₹5,00,00,000</span></div></div>
+        <div class="field"><div class="fieldline"><label for="rate">Interest rate</label><div class="valuebox"><input id="rate" type="number" min="0.1" max="30" step="0.1" value="8.5" inputmode="decimal" aria-label="Annual interest rate"><span class="unit">% p.a.</span></div></div><input id="rateRange" type="range" min="0.1" max="30" step="0.1" value="8.5" aria-label="Adjust interest rate"><div class="bounds"><span>0.1%</span><span>30%</span></div></div>
+        <div class="field"><div class="fieldline"><label for="years">Loan tenure</label><div class="valuebox"><input id="years" type="number" min="1" max="30" step="1" value="20" inputmode="numeric" aria-label="Loan tenure"><span class="unit">years</span></div></div><input id="yearsRange" type="range" min="1" max="30" step="1" value="20" aria-label="Adjust loan tenure"><div class="bounds"><span>1 year</span><span>30 years</span></div></div><p class="hint">Your estimate updates as you change any value.</p>
+      </div>
+      <div class="card result" aria-live="polite"><div class="result-top"><div class="result-title"><div><h2>Your repayment snapshot</h2><div class="subhead">An estimate based on your loan details</div></div><button class="icon-button" id="share" title="Copy a summary" aria-label="Copy calculation summary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg></button></div><div class="monthly"><div class="monthly-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M15 8.5c-.7-.8-1.8-1.2-3-1.2-1.7 0-3 .9-3 2.2s1.2 2 3 2.4 3 1.1 3 2.4-1.3 2.2-3 2.2c-1.2 0-2.3-.4-3-1.2M12 5.5v13"/></svg>Estimated monthly EMI</div><div class="monthly-amount" id="emi">₹21,696<span> / month</span></div><small>For <span id="monthsText">240</span> monthly payments</small></div><div class="breakdown"><div class="stat"><div class="stat-top"><i class="legend"></i>Principal amount</div><strong id="principal">₹25,00,000</strong><small>Amount borrowed</small></div><div class="stat"><div class="stat-top"><i class="legend interest"></i>Total interest</div><strong id="interest">₹27,27,056</strong><small>Over the loan term</small></div></div></div><div class="chart-section"><div class="chart-head"><strong>Cost composition</strong><span id="totalText">Total repayment ₹52,27,056</span></div><div class="chart" role="img" aria-label="Principal and interest composition"><span class="principal" id="principalBar"></span><span class="interest" id="interestBar"></span></div><div class="chart-labels"><span><i></i><span id="principalPercent">48% principal</span></span><span><i class="pale"></i><span id="interestPercent">52% interest</span></span></div></div></div>
+    </section>
+    <section class="card table-card"><div class="table-head"><div><h2>Year-by-year repayment</h2><p>See how your balance reduces over time</p></div><div class="table-actions"><button class="outline-button" id="exportBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v12m0 0 4-4m-4 4-4-4"/><path d="M5 16v4h14v-4"/></svg>Export CSV</button></div></div><div class="table-wrap"><table><thead><tr><th>Year</th><th>Principal paid</th><th>Interest paid</th><th>Closing balance</th></tr></thead><tbody id="schedule"></tbody></table></div></section>
+    <footer class="footer"><span><strong>For planning purposes only.</strong> This estimate does not include fees, taxes or lender-specific terms. Actual offers may vary.</span><span>Calculated using a standard reducing-balance method.</span></footer>
+  </main><div id="toast" class="toast" role="status"></div>
+  <script src="script.js" defer></script>
+</body>
+</html>
